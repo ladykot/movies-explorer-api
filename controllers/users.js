@@ -13,7 +13,7 @@ const { JWT_SECRET, NODE_ENV } = process.env;
 
 module.exports.createUser = (req, res, next) => {
   const {
-    name, about, avatar, email, password,
+    name, email, password,
   } = req.body; // кладем в body запроса данные
   // валидация поля email уже в роутере
 
@@ -22,16 +22,12 @@ module.exports.createUser = (req, res, next) => {
     .hash(password, SALT)
     .then((hash) => User.create({
       name,
-      about,
-      avatar,
       email,
       password: hash,
     }))
     .then((user) => {
       res.status(201).send({
         name: user.name,
-        about: user.about,
-        avatar: user.avatar,
         email: user.email,
       });
     })
@@ -49,12 +45,12 @@ module.exports.createUser = (req, res, next) => {
 };
 
 module.exports.updateUser = (req, res, next) => {
-  const { name, about } = req.body;
+  const { name, email } = req.body;
   return User.findByIdAndUpdate(
     req.user._id,
     {
       name,
-      about,
+      email,
     },
     {
       new: true,
@@ -63,9 +59,9 @@ module.exports.updateUser = (req, res, next) => {
   )
     .then((user) => {
       if (!user) {
-        throw new NotFoundError('The user is not found');
+        throw new NotFoundError('Пользователь не найден');
       }
-      return res.send({ data: user });
+      return res.send({ user });
     })
     .catch((err) => {
       if (err.name === 'ValidationError') {
@@ -80,34 +76,8 @@ module.exports.updateUser = (req, res, next) => {
     });
 };
 
-// все пользователи
-module.exports.getUsers = (req, res, next) => {
-  User.find({})
-    .then((users) => {
-      res.status(200).send({ data: users });
-    })
-    .catch(next);
-};
-
-module.exports.getUser = (req, res, next) => {
-  User.findById(req.params.userId)
-    .then((user) => {
-      if (!user) {
-        throw new NotFoundError('Пользователь не найден');
-      }
-      return res.status(200).send({ data: user });
-    })
-    .catch((err) => {
-      if (err.kind === 'ObjectId') {
-        return next(new BadRequestError('Передан некорретный Id'));
-      }
-      return next(err);
-    });
-};
-
 module.exports.getCurrentUser = (req, res, next) => {
   const userId = req.user._id;
-
   User.findById(userId)
     .then((user) => {
       if (!user) {
@@ -121,34 +91,6 @@ module.exports.getCurrentUser = (req, res, next) => {
         return;
       }
       next(err);
-    });
-};
-
-module.exports.updateAvatar = (req, res, next) => {
-  const { avatar } = req.body;
-  User.findByIdAndUpdate(
-    req.user._id,
-    { avatar },
-    {
-      new: true,
-      runValidators: true,
-      upsert: false,
-    },
-  )
-    .then((user) => {
-      if (!user) {
-        throw new NotFoundError('Пользователь с таким _id не найден');
-      }
-      return res.status(200).send({ data: user });
-    })
-    .catch((err) => {
-      if (err.name === 'ValidationError') {
-        return next(new BadRequestError('Данные введены некорректно'));
-      }
-      if (err.kind === 'ObjectId') {
-        return next(new BadRequestError('Данные введены некорректно'));
-      }
-      return next(err);
     });
 };
 
