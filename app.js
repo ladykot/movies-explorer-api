@@ -11,7 +11,6 @@ const NotFoundError = require('./errors/not-found_404');
 const { createUser, login } = require('./controllers/users');
 const auth = require('./midlewares/auth');
 const { errorHandler } = require('./midlewares/errorHandler');
-const { urlPattern } = require('./utils/url-pattern');
 const { requestLogger, errorLogger } = require('./midlewares/logger');
 
 const { PORT = 3000 } = process.env;
@@ -25,7 +24,7 @@ app.use(cookieParser());
 app.use(helmet()); // проставляем заголовки безопасности
 
 // подключаемся к серверу mongo
-mongoose.connect('mongodb://localhost:27017/mestodb');
+mongoose.connect('mongodb://localhost:27017/moviesdb');
 
 app.use(requestLogger); // подключаем логгер запросов
 

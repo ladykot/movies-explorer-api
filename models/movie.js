@@ -89,4 +89,4 @@ const movieSchema = new mongoose.Schema({
 });
 
 // создаём модель и экспортируем её
-module.exports = mongoose.model('card', movieSchema);
+module.exports = mongoose.model('movie', movieSchema);
