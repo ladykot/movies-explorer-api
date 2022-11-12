@@ -20,7 +20,8 @@ router.post(
     body: Joi.object().keys({
       country: Joi.string().required().min(2).max(30),
       director: Joi.string().required().min(2).max(30),
-      duration: Joi.string().required().min(2).max(30),
+      duration: Joi.number().required(),
+      description: Joi.string().required(),
       year: Joi.date().required(), // нужно уточнить
       nameRU: Joi.string().required().min(2).max(30),
       nameEN: Joi.string().required().min(2).max(30),
