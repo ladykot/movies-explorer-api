@@ -17,20 +17,17 @@ const movieSchema = new mongoose.Schema({
 
   duration: {
     type: Number,
-    equire: true,
+    require: true,
   },
 
   year: {
     type: String,
-    equire: true,
-    validate: {
-      validator: (year) => isDate(year),
-    },
+    require: true,
   },
 
   description: {
     type: String,
-    equire: true,
+    require: true,
   },
 
   image: {
@@ -58,12 +55,6 @@ const movieSchema = new mongoose.Schema({
       validator: (url) => isUrl(url),
       message: 'Ссылка не корректна',
     },
-  },
-
-  user: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'user', // id пользователя
-    required: true,
   },
 
   nameRU: {

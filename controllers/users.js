@@ -86,10 +86,6 @@ module.exports.getCurrentUser = (req, res, next) => {
       res.send({ data: user });
     })
     .catch((err) => {
-      if (err.name === 'CastError') {
-        next(new BadRequestError('Передан некорретный Id'));
-        return;
-      }
       next(err);
     });
 };

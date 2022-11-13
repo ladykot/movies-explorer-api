@@ -18,13 +18,13 @@ router.post(
   '/',
   celebrate({
     body: Joi.object().keys({
-      country: Joi.string().required().min(2).max(30),
-      director: Joi.string().required().min(2).max(30),
+      country: Joi.string().required(),
+      director: Joi.string().required(),
       duration: Joi.number().required(),
       description: Joi.string().required(),
       year: Joi.date().required(), // нужно уточнить
-      nameRU: Joi.string().required().min(2).max(30),
-      nameEN: Joi.string().required().min(2).max(30),
+      nameRU: Joi.string().required(),
+      nameEN: Joi.string().required(),
       image: Joi.string().required().pattern(urlPattern),
       trailerLink: Joi.string().required().pattern(urlPattern),
       thumbnail: Joi.string().required().pattern(urlPattern),
