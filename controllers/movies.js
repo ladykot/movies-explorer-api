@@ -1,6 +1,9 @@
 const BadRequestError = require('../errors/bad_req_400');
+const { BAD_REQUEST_MESSAGE } = require('../utils/constants');
 const NotFoundError = require('../errors/not-found_404');
+const { NOT_FOUND_MESSAGE } = require('../utils/constants');
 const ForbittenError = require('../errors/forbidden_403');
+const { FORBIDDEN_URL_MESSAGE } = require('../utils/constants');
 
 const Movie = require('../models/movie');
 
@@ -41,7 +44,7 @@ module.exports.addMovie = (req, res, next) => {
     .then((movie) => res.send({ movie }))
     .catch((err) => {
       if (err.name === 'ValidationError') {
-        next(new BadRequestError('Данные для фильма переданы некорректно'));
+        next(new BadRequestError(BAD_REQUEST_MESSAGE));
       } else {
         next(err);
       }
@@ -61,17 +64,16 @@ module.exports.deleteMovie = (req, res, next) => {
   Movie.findById(req.params.userId)
     .then((movie) => {
       if (!movie) {
-        throw new NotFoundError('Фильм с указанным _id не найден');
+        throw new NotFoundError(NOT_FOUND_MESSAGE);
       }
       if (!movie.owner.equals(req.user._id)) {
-        throw new ForbittenError('Вы не можете удалить чужой фильм');
+        throw new ForbittenError(FORBIDDEN_URL_MESSAGE);
       }
-      return movie.remove().then(() => res.send({ movie, message: 'Успешно удален фильм:' }));
-      // возможно так: return Movie.findByIdAndRemove(movie._id);
+      return movie.remove().then(() => res.send({ movie }));
     })
     .catch((err) => {
       if (err.kind === 'ObjectId') {
-        return next(new BadRequestError('Не корректный id'));
+        return next(new BadRequestError(BAD_REQUEST_MESSAGE));
       }
       return next(err);
     });

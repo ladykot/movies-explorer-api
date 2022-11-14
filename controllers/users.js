@@ -1,11 +1,16 @@
-const bcrypt = require('bcrypt'); // импортируем bcrypt
+const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const NotFoundError = require('../errors/not-found_404');
-const BadRequestError = require('../errors/bad_req_400');
-const ConflictError = require('../errors/conflict_409');
 const User = require('../models/user');
-const { SALT } = require('../utils/constants');
+const NotFoundError = require('../errors/not-found_404');
+const { NOT_FOUND_MESSAGE } = require('../utils/constants');
+const BadRequestError = require('../errors/bad_req_400');
+const { BAD_REQUEST_MESSAGE } = require('../utils/constants');
+const ConflictError = require('../errors/conflict_409');
+const { CONFLICT_ERROR_MESSAGE } = require('../utils/constants');
 const UnauthorizedError = require('../errors/unauthorized_401');
+const { UNAUTHORIZED_MESSAGE } = require('../utils/constants');
+const { OK_CODE } = require('../utils/constants');
+const { SALT } = require('../utils/constants');
 
 const { JWT_SECRET, NODE_ENV } = process.env;
 
@@ -14,7 +19,7 @@ const { JWT_SECRET, NODE_ENV } = process.env;
 module.exports.createUser = (req, res, next) => {
   const {
     name, email, password,
-  } = req.body; // кладем в body запроса данные
+  } = req.body; // кладем в body запроса данные пользователя
   // валидация поля email уже в роутере
 
   // хешируем пароль
@@ -34,11 +39,11 @@ module.exports.createUser = (req, res, next) => {
     .catch((err) => {
       if (err.code === 11000) {
         return next(
-          new ConflictError('Пользователь с таким email уже существует'),
+          new ConflictError(CONFLICT_ERROR_MESSAGE),
         );
       }
       if (err.name === 'ValidationError') {
-        return next(new BadRequestError('Данные переданы некорректно'));
+        return next(new BadRequestError(BAD_REQUEST_MESSAGE));
       }
       return next(err);
     });
@@ -59,18 +64,23 @@ module.exports.updateUser = (req, res, next) => {
   )
     .then((user) => {
       if (!user) {
-        throw new NotFoundError('Пользователь не найден');
+        throw new NotFoundError(NOT_FOUND_MESSAGE);
       }
       return res.send({ user });
     })
     .catch((err) => {
       if (err.name === 'ValidationError') {
         return next(
-          new BadRequestError('The information you provided is not correct'),
+          new BadRequestError(BAD_REQUEST_MESSAGE),
+        );
+      }
+      if (err.code === 11000) {
+        return next(
+          new ConflictError(CONFLICT_ERROR_MESSAGE),
         );
       }
       if (err.kind === 'ObjectId') {
-        return next(new BadRequestError('Id is not correct'));
+        return next(new BadRequestError(BAD_REQUEST_MESSAGE));
       }
       return next(err);
     });
@@ -81,7 +91,7 @@ module.exports.getCurrentUser = (req, res, next) => {
   User.findById(userId)
     .then((user) => {
       if (!user) {
-        throw new NotFoundError('Пользователь не найден');
+        throw new NotFoundError(NOT_FOUND_MESSAGE);
       }
       res.send({ data: user });
     })
@@ -96,11 +106,11 @@ module.exports.login = (req, res, next) => {
     .select('+password')
     .then((user) => {
       if (!user) {
-        throw new UnauthorizedError('Неверный логин или пароль');
+        throw new UnauthorizedError(UNAUTHORIZED_MESSAGE);
       }
       bcrypt.compare(password, user.password, (err, isValidPassword) => {
         if (!isValidPassword) {
-          return next(new UnauthorizedError('Неверный логин или пароль'));
+          return next(new UnauthorizedError(UNAUTHORIZED_MESSAGE));
         }
         const token = jwt.sign(
           { _id: user._id },
@@ -109,7 +119,7 @@ module.exports.login = (req, res, next) => {
             expiresIn: '7d',
           },
         );
-        return res.status(200).send({ token });
+        return res.status(OK_CODE).send({ token });
       });
     })
     .catch(next);

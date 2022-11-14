@@ -3,6 +3,7 @@ const userRouter = require('./users');
 const movieRouter = require('./movies');
 const { login, createUser } = require('../controllers/users');
 const auth = require('../midlewares/auth');
+const { NOT_FOUND_MESSAGE } = require('../utils/constants');
 
 const {
   userValidator,
@@ -19,7 +20,7 @@ router.use('/users', userRouter);
 router.use('/movies', movieRouter);
 
 router.all('*', (req, res, next) => {
-  next(new NotFoundError('Ресурс по указанному адресу не найден'));
+  next(new NotFoundError(NOT_FOUND_MESSAGE));
 });
 
 module.exports = router;

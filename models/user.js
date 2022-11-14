@@ -4,10 +4,9 @@ const isEmail = require('validator/lib/isEmail');
 // Опишем схему пользователя:
 const userSchema = new mongoose.Schema({
   name: {
-    type: String, // имя — это строка
-    default: 'Виталик', // оно должно быть у каждого пользователя
-    minlength: 2, // минимальная длина имени — 2 символа
-    maxlength: 30, // а максимальная — 30 символов
+    type: String,
+    minlength: 2,
+    maxlength: 30,
   },
 
   email: {
