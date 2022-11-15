@@ -13,6 +13,7 @@ const CONFLICT_ERROR_CODE = 409;
 const CONFLICT_ERROR_MESSAGE = 'Пользователь с таким email уже существует';
 const SALT = 10;
 const LINK_INCORRECT = 'Ссылка не корректна';
+const LIMIT_MESSAGE = 'Вы превысили число запросов по данному адресу';
 
 module.exports = {
   NOT_FOUND_CODE,
@@ -30,4 +31,5 @@ module.exports = {
   FORBIDDEN_URL_CODE,
   FORBIDDEN_URL_MESSAGE,
   LINK_INCORRECT,
+  LIMIT_MESSAGE,
 };
