@@ -8,6 +8,6 @@ const { addMovie, getMovies, deleteMovie } = require('../controllers/movies');
 
 router.get('/', getMovies); // endpoint
 router.delete('/:movieId', movieIdValidator, deleteMovie);
-router.post('/', movieValidator, addMovie);
+router.post('/:movieId', movieValidator, movieIdValidator, addMovie);
 
 module.exports = router;

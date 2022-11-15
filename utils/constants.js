@@ -12,6 +12,7 @@ const UNAUTHORIZED_MESSAGE = 'Неверный логин или пароль';
 const CONFLICT_ERROR_CODE = 409;
 const CONFLICT_ERROR_MESSAGE = 'Пользователь с таким email уже существует';
 const SALT = 10;
+const LINK_INCORRECT = 'Ссылка не корректна';
 
 module.exports = {
   NOT_FOUND_CODE,
@@ -28,4 +29,5 @@ module.exports = {
   CONFLICT_ERROR_CODE,
   FORBIDDEN_URL_CODE,
   FORBIDDEN_URL_MESSAGE,
+  LINK_INCORRECT,
 };

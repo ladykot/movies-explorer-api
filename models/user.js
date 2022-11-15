@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const isEmail = require('validator/lib/isEmail');
+const { MAIL_INCORRECT } = require('../utils/constants');
 
 // Опишем схему пользователя:
 const userSchema = new mongoose.Schema({
@@ -16,7 +17,7 @@ const userSchema = new mongoose.Schema({
     // minlength: 2,
     validate: {
       validator: (v) => isEmail(v),
-      message: 'Неправильный формат почты',
+      message: MAIL_INCORRECT,
     },
   },
   password: {

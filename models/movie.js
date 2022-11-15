@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const isUrl = require('validator/lib/isURL');
-const isDate = require('validator/lib/isDate');
+const { LINK_INCORRECT } = require('../utils/constants');
 
 // Опишем схему карточки фильма:
 const movieSchema = new mongoose.Schema({
@@ -35,7 +35,7 @@ const movieSchema = new mongoose.Schema({
     required: true,
     validate: {
       validator: (url) => isUrl(url),
-      message: 'Ссылка не корректна',
+      message: LINK_INCORRECT,
     },
   },
 
@@ -44,7 +44,7 @@ const movieSchema = new mongoose.Schema({
     required: true,
     validate: {
       validator: (url) => isUrl(url),
-      message: 'Ссылка не корректна',
+      message: LINK_INCORRECT,
     },
   },
 
@@ -53,7 +53,7 @@ const movieSchema = new mongoose.Schema({
     required: true,
     validate: {
       validator: (url) => isUrl(url),
-      message: 'Ссылка не корректна',
+      message: LINK_INCORRECT,
     },
   },
 
@@ -76,7 +76,6 @@ const movieSchema = new mongoose.Schema({
     required: true,
     ref: 'user',
   },
-
 });
 
 // создаём модель и экспортируем её

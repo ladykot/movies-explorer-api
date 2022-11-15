@@ -25,8 +25,9 @@ module.exports.addMovie = (req, res, next) => {
     thumbnail,
     movieId,
   } = req.body;
-  // что в user?
+  console.dir(movieId);
   const owner = req.user._id;
+
   Movie.create({
     country,
     director,
@@ -41,7 +42,7 @@ module.exports.addMovie = (req, res, next) => {
     movieId,
     owner,
   })
-    .then((movie) => res.send({ movie }))
+    .then((movie) => res.send(movie))
     .catch((err) => {
       if (err.name === 'ValidationError') {
         next(new BadRequestError(BAD_REQUEST_MESSAGE));
