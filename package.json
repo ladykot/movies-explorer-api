@@ -1,0 +1,47 @@
+{
+  "name": "movies-explorer-api",
+  "version": "1.0.0",
+  "description": "Backend for movies-explorer-app",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "npx eslint .",
+    "start": "node app.js",
+    "dev": "cross-env PORT=7777 nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ladykot/movies-explorer-api.git"
+  },
+  "keywords": [],
+  "author": "Katerina Akilina",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ladykot/movies-explorer-api/issues"
+  },
+  "homepage": "https://github.com/ladykot/movies-explorer-api#readme",
+  "dependencies": {
+    "bcrypt": "^5.1.0",
+    "body-parser": "^1.20.0",
+    "celebrate": "^15.0.1",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.1",
+    "express-rate-limit": "^6.6.0",
+    "express-winston": "^4.2.0",
+    "helmet": "^6.0.0",
+    "jsonwebtoken": "^8.5.1",
+    "logger": "^0.0.1",
+    "mongoose": "^6.6.2",
+    "validator": "^13.7.0",
+    "winston": "^3.8.2"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3",
+    "eslint": "^8.24.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "nodemon": "^2.0.20"
+  }
+}
