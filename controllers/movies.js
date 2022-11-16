@@ -11,7 +11,6 @@ const Movie = require('../models/movie');
 
 // добавить фильм
 module.exports.addMovie = (req, res, next) => {
-  // eslint-disable-next-line max-len
   const {
     country,
     director,
@@ -25,9 +24,7 @@ module.exports.addMovie = (req, res, next) => {
     thumbnail,
     movieId,
   } = req.body;
-  console.dir(movieId);
   const owner = req.user._id;
-
   Movie.create({
     country,
     director,
