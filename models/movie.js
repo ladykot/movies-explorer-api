@@ -60,15 +60,15 @@ const movieSchema = new mongoose.Schema({
   nameRU: {
     type: String,
     required: true,
-    minlength: 2,
-    maxlength: 30,
+    // minlength: 2,
+    // maxlength: 30,
   },
 
   nameEN: {
     type: String,
     required: true,
-    minlength: 2,
-    maxlength: 30,
+    // minlength: 2,
+    // maxlength: 30,
   },
   // id фильма
   movieId: {

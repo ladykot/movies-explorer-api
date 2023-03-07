@@ -59,16 +59,21 @@ module.exports.getMovies = (req, res, next) => {
 
 // Удалить фильм
 module.exports.deleteMovie = (req, res, next) => {
-  Movie.findById(req.params.userId)
+  // console.log(`req.params.movieId = ${req.params.movieId}`);
+  const { movieId } = req.params;
+  const userId = req.user._id;
+  Movie.findById({ _id: movieId })
     .then((movie) => {
       if (!movie) {
         throw new NotFoundError(NOT_FOUND_MESSAGE);
       }
-      if (!movie.owner.equals(req.user._id)) {
+      console.log('movie.owner:', movie.owner);
+      if (!movie.owner.equals(userId)) {
         throw new ForbittenError(FORBIDDEN_URL_MESSAGE);
       }
-      return movie.remove().then(() => res.send({ movie }));
+      return Movie.findByIdAndRemove({ _id: movieId });
     })
+    .then((movie) => res.send({ movie }))
     .catch((err) => {
       if (err.kind === 'ObjectId') {
         return next(new BadRequestError(BAD_REQUEST_MESSAGE));
