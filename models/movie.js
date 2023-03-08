@@ -76,6 +76,12 @@ const movieSchema = new mongoose.Schema({
     required: true,
     ref: 'user',
   },
+  // _id пользователя, который сохранил фильма
+  owner: {
+    type: mongoose.Schema.Types.ObjectId, // сюда запишется ссылка на создателя карточки
+    required: true,
+    ref: 'user',
+  },
 });
 
 // создаём модель и экспортируем её
