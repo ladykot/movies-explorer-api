@@ -25,6 +25,7 @@ module.exports.addMovie = (req, res, next) => {
     movieId,
   } = req.body;
   const owner = req.user._id;
+  console.log(owner);
   Movie.create({
     country,
     director,
@@ -53,7 +54,7 @@ module.exports.addMovie = (req, res, next) => {
 module.exports.getMovies = (req, res, next) => {
   const owner = req.user._id;
   Movie.find({ owner })
-    .then((movies) => res.send({ movies }))
+    .then((movies) => res.send(movies))
     .catch(next);
 };
 
@@ -67,7 +68,7 @@ module.exports.deleteMovie = (req, res, next) => {
       if (!movie) {
         throw new NotFoundError(NOT_FOUND_MESSAGE);
       }
-      console.log('movie.owner:', movie.owner);
+      // console.log('movie.owner:', movie.owner);
       if (!movie.owner.equals(userId)) {
         throw new ForbittenError(FORBIDDEN_URL_MESSAGE);
       }

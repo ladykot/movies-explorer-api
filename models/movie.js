@@ -80,7 +80,7 @@ const movieSchema = new mongoose.Schema({
   owner: {
     type: mongoose.Schema.Types.ObjectId, // сюда запишется ссылка на создателя карточки
     required: true,
-    ref: 'user',
+    ref: 'User',
   },
 });
 
