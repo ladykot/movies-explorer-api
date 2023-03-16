@@ -12,7 +12,6 @@ const router = require('./routes/index');
 const limiter = require('./utils/limiter');
 
 const { DATA_BASE, NODE_ENV } = process.env;
-
 const { PORT = 3000 } = process.env;
 const app = express();
 mongoose.connect(NODE_ENV === 'production' ? DATA_BASE : 'mongodb://localhost:27017/moviesdb', {

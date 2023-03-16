@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
-const isEmail = require('validator/lib/isEmail');
+// const isEmail = require('validator/lib/isEmail');
 const { MAIL_INCORRECT } = require('../utils/constants');
+
+const emailRegex = /[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9_-]+/;
 
 // Опишем схему пользователя:
 const userSchema = new mongoose.Schema({
@@ -16,7 +18,7 @@ const userSchema = new mongoose.Schema({
     unique: true,
     // minlength: 2,
     validate: {
-      validator: (v) => isEmail(v),
+      validator: (v) => emailRegex.test(v),
       message: MAIL_INCORRECT,
     },
   },
