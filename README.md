@@ -1,7 +1,17 @@
-# movies-explorer-api
-Backend for movies-explorer-app
+# Бэкенд приложения movies-explorer
 
-Backend is available on the URL:
+Серверная часть для итогового проекта курса веб-разработки Я.Практикум.
+С фронтэнд частью можно ознакомиться по [ссылке](https://github.com/ladykot/movies-explorer-frontend)
 
-- 178.154.227.78;
-- <https://api.movies.ladykot.nomoredomains.icu/>.
+## Функционал
+- Облачный сервер;
+- Логирование запросов к API;
+- Валидация данных;
+- Централизованная обработка ошибок;
+- Выпуск и проверка токенов;
+
+## Технологии
+- Node;
+- Expreess;
+- MongoDB;
+- ChatGPT (для поиска ошибок).
