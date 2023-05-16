@@ -14,4 +14,5 @@
 - Node;
 - Expreess;
 - MongoDB;
+- JWT-стандарт;
 - ChatGPT (для поиска ошибок).
