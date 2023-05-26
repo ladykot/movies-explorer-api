@@ -1,7 +1,7 @@
 # Бэкенд приложения movies-explorer
 
 Серверная часть для итогового проекта курса веб-разработки Я.Практикум.
-С фронтэнд частью можно ознакомиться по [ссылке](https://github.com/ladykot/movies-explorer-frontend)
+Репозиторий с фронтенд-частью находится по [ссылке](https://github.com/ladykot/movies-explorer-frontend)
 
 ## Функционал
 - Облачный сервер;
@@ -16,3 +16,5 @@
 - MongoDB;
 - JWT-стандарт;
 - ChatGPT (для поиска ошибок в коде).
+
+Сервер запущен [здесь](https://api-movies-explorer-ladykot.glitch.me/)

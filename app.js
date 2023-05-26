@@ -22,8 +22,12 @@ mongoose.connect(
   },
 );
 
+// app.use(cors({
+//   origin: 'https://movies-explorer-ladykot.netlify.app',
+// }));
+
 app.use(cors({
-  origin: 'https://movies-explorer-ladykot.netlify.app',
+  origin: '*',
 }));
 
 app.use(bodyParser.json());
