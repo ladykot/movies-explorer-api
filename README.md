@@ -1,7 +1,9 @@
 # Бэкенд приложения movies-explorer
 
 Серверная часть для итогового проекта курса веб-разработки Я.Практикум.
-Репозиторий с фронтенд-частью находится по [ссылке](https://github.com/ladykot/movies-explorer-frontend)
+
+Movies-explorer представляет собой [React-приложение](https://movies-explorer-ladykot.netlify.app/) для поиска и сохранения любимых фильмов.
+
 
 ## Функционал
 - Облачный сервер;
@@ -17,4 +19,7 @@
 - JWT-стандарт;
 - ChatGPT (для поиска ошибок в коде).
 
+___
 Сервер запущен [здесь](https://api-movies-explorer-ladykot.glitch.me/)
+
+Репозиторий с фронтенд-частью находится по [ссылке](https://github.com/ladykot/movies-explorer-frontend)
