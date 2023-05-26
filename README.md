@@ -2,7 +2,7 @@
 
 Серверная часть для итогового проекта курса веб-разработки Я.Практикум.
 
-Movies-explorer представляет собой [React-приложение](https://movies-explorer-ladykot.netlify.app/) для поиска и сохранения любимых фильмов.
+[Movies-explorer](https://movies-explorer-ladykot.netlify.app/) представляет собой react-приложение для поиска и сохранения любимых фильмов.
 
 
 ## Функционал
